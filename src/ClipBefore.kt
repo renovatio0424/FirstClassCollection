@@ -2,7 +2,7 @@ class ClipBefore {
     private val adjustmentList: List<Adjustment> = Adjustment.newAdjustment()
 
     //소유한 객체에서 해당 데이터를 관리하는 함수들 & 로직들이 필요하다
-    fun getAppliedAdjustmentList(): List<Adjustment>
+   fun getAppliedAdjustmentList(): List<Adjustment>
             = adjustmentList.filter { it.factor != 0.5f }
 }
 
