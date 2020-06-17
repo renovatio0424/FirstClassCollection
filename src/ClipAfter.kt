@@ -18,9 +18,9 @@ class ClipAfter {
 class Adjustments {
     private val adjustmentList: List<Adjustment> = Adjustment.newAdjustment()
 
-    private fun getFactor(type: AdjustmentType): Float
-            = adjustmentList.find { it.type == type }?.factor ?: 0f
+    private fun getFactor(type: AdjustmentType): Float = adjustmentList.find { it.type == type }?.factor ?: 0f
 
-    fun getEngineValue(type: AdjustmentType): Float
-            = getFactor(type) * 255f
+    fun getEngineValue(type: AdjustmentType): Float = getFactor(type) * 255f
+
+    fun getAppliedAdjustmentList(): List<Adjustment> = adjustmentList.filter { it.factor != 0.5f }
 }

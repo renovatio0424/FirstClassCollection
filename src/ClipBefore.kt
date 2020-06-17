@@ -1,22 +1,9 @@
 class ClipBefore {
     private val adjustmentList: List<Adjustment> = Adjustment.newAdjustment()
 
-    fun applyAdjustmentToEngine() {
-        val brightness = getEngineValue(AdjustmentType.BRIGHTNESS)
-        val contrast = getEngineValue(AdjustmentType.CONTRAST)
-        val saturation = getEngineValue(AdjustmentType.SATURATION)
-
-        println("apply adjustment brightness: $brightness")
-        println("apply adjustment contrast: $contrast")
-        println("apply adjustment saturation: $saturation")
-    }
-
-    // adjustment 에 대한 비즈니스 로직이 Clip 에 추가 되어야 했다...
-    private fun getFactor(type: AdjustmentType): Float
-            = adjustmentList.find { it.type == type }?.factor ?: 0f
-
-    private fun getEngineValue(type: AdjustmentType): Float
-            = getFactor(type) * 255f
+    //소유한 객체에서 해당 데이터를 관리하는 함수들 & 로직들이 필요하다
+    fun getAppliedAdjustmentList(): List<Adjustment>
+            = adjustmentList.filter { it.factor != 0.5f }
 }
 
 //Before Refactoring
