@@ -1,5 +1,5 @@
 class ClipAfter {
-    private val adjustments: Adjustments = Adjustments()
+    private val adjustments: Adjustments = Adjustments(listOf())
 
     //비즈니스에 종속적인 로직
     fun applyAdjustmentToEngine() {
@@ -15,8 +15,12 @@ class ClipAfter {
 }
 
 //After Refactoring (First Class Collection)
-class Adjustments {
-    private val adjustmentList: List<Adjustment> = Adjustment.newAdjustment()
+class Adjustments() {
+    private lateinit var adjustmentList: List<Adjustment>
+
+    constructor(adjustmentList: List<Adjustment>?) : this() {
+        this.adjustmentList = adjustmentList ?: Adjustment.newAdjustment()
+    }
 
     private fun getFactor(type: AdjustmentType): Float
             = adjustmentList.find { it.type == type }?.factor ?: 0f

@@ -1,5 +1,9 @@
-class ClipBefore {
-    private val adjustmentList: List<Adjustment> = Adjustment.newAdjustment()
+class ClipBefore() {
+    private lateinit var adjustmentList: List<Adjustment>
+
+    constructor(adjustmentList: List<Adjustment>?) : this() {
+        this.adjustmentList = adjustmentList ?: Adjustment.newAdjustment()
+    }
 
     fun applyAdjustmentToEngine() {
         val brightness = getEngineValue(AdjustmentType.BRIGHTNESS)
@@ -11,12 +15,13 @@ class ClipBefore {
         println("apply adjustment saturation: $saturation")
     }
 
-    // adjustment 에 대한 비즈니스 로직이 Clip 에 추가 되어야 했다...
-    private fun getFactor(type: AdjustmentType): Float
-            = adjustmentList.find { it.type == type }?.factor ?: 0f
+    fun showAdjustments() {
+        adjustmentList.forEach { println(it.type.name + " / " + it.factor) }
+    }
 
-    private fun getEngineValue(type: AdjustmentType): Float
-            = getFactor(type) * 255f
+    private fun getFactor(type: AdjustmentType): Float = adjustmentList.find { it.type == type }?.factor ?: 0f
+
+    private fun getEngineValue(type: AdjustmentType): Float = getFactor(type) * 255f
 }
 
 //Before Refactoring
